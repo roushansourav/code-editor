@@ -1,16 +1,14 @@
 import React from "react";
 import Col from "react-bootstrap/Col";
+import clsx from "clsx";
 
 function Preview({ previewNode, modeToggle, fileURL }) {
   return (
     <Col id="preview-container" sm={12} md={6}>
-      <div className="tooltip-container">
-      </div>
       <div
-        id="preview"
-        style={{ width: "100%", height: "100%" }}
-        className="card-div"
-      >
+        className={clsx("tooltip-container", "tooltip-container-frame")}
+      ></div>
+      <div id="preview" style={{ width: "100%" }} className="card-div">
         <iframe
           ref={previewNode}
           style={{
