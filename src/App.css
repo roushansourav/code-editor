@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  max-width: 100% !important;
 }
 
 .App-logo {
@@ -35,4 +36,27 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+#editor {
+  position: relative;
+  width: 100%;
+  height: calc(100% - 50px);
+}
+#preview-container {
+  height: 100vh;
+}
+
+@media screen and (max-width: 767px) {
+  #editor {
+    position: relative;
+    height: 50vh;
+  }
+  #preview-container {
+    height: 50vh;
+  }
+}
+
+.tooltip-container {
+  height: 50px;
 }
