@@ -3,6 +3,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
+import Form from "react-bootstrap/Form";
 
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -16,8 +17,10 @@ function App() {
   const code = "<!--write your code here-->";
   const [text, setText] = useState("");
   const [fileURL, setFileURL] = useState("");
+  const [modeToggle, setModeToggle] = useState(false);
   const editorNode = useRef(null);
   const previewNode = useRef(null);
+  const editor = useRef(null);
 
   const handleRun = (e) => {
     e.preventDefault();
@@ -25,17 +28,21 @@ function App() {
     element.setAttribute("srcdoc", text);
   };
 
+  const handleMode = (e) => {
+    e.preventDefault();
+    setModeToggle(!modeToggle);
+  };
+
   useEffect(() => {
     if (editorNode.current) {
-      const editor = ace.edit(editorNode.current);
-      editor.setTheme(twilightTheme);
-      editor.session.setMode(new Mode());
-      editor.setShowPrintMargin(false);
-      editor.setOptions({
+      editor.current = ace.edit(editorNode.current);
+      editor.current.session.setMode(new Mode());
+      editor.current.setShowPrintMargin(false);
+      editor.current.setOptions({
         fontSize: "16px",
       });
-      editor.session.on("change", function (delta) {
-        const value = editor.getSession().getValue();
+      editor.current.session.on("change", function (delta) {
+        const value = editor.current.getSession().getValue();
         setText(value);
         if (value) {
           const file = new Blob([value], { type: "text/plain" });
@@ -46,9 +53,16 @@ function App() {
     }
   }, []);
 
+  useEffect(() => {
+    if (modeToggle) editor.current.setTheme(twilightTheme);
+    else editor.current.setTheme();
+  }, [modeToggle]);
+
+  console.log(modeToggle);
   return (
     <Container className="App">
       <h1>Welcome to my editor</h1>
+      <Button onClick={handleMode}>{modeToggle ? "Light" : "Dark"}</Button>
       <Row>
         <Col sm={12} md={6}>
           <div className="tooltip-container">
