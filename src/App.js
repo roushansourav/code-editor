@@ -10,13 +10,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import ace from "ace-builds";
 import "ace-builds/webpack-resolver";
 import twilightTheme from "ace-builds/src-noconflict/theme-twilight";
-import {Mode} from "ace-builds/src-noconflict/mode-html";
+import { Mode } from "ace-builds/src-noconflict/mode-html";
 
 function App() {
   const code = "<!--write your code here-->";
   const [text, setText] = useState("");
   const [fileURL, setFileURL] = useState("");
-  const node = useRef(null);
+  const editorNode = useRef(null);
   const previewNode = useRef(null);
 
   const handleRun = (e) => {
@@ -26,12 +26,14 @@ function App() {
   };
 
   useEffect(() => {
-    if (node.current) {
-      const editor = ace.edit(node.current);
+    if (editorNode.current) {
+      const editor = ace.edit(editorNode.current);
       editor.setTheme(twilightTheme);
       editor.session.setMode(new Mode());
       editor.setShowPrintMargin(false);
-      editor.setOptions({ minLines: 200, fontSize: "16px" });
+      editor.setOptions({
+        fontSize: "16px",
+      });
       editor.session.on("change", function (delta) {
         const value = editor.getSession().getValue();
         setText(value);
@@ -52,7 +54,7 @@ function App() {
           <div className="tooltip-container">
             <Button onClick={handleRun}>Run</Button>
           </div>
-          <div id="editor" ref={node}>
+          <div id="editor" ref={editorNode} className="card-div">
             {code}
           </div>
         </Col>
@@ -67,13 +69,18 @@ function App() {
               Download
             </a>
           </div>
-          <iframe
-            ref={previewNode}
+          <div
             id="preview"
-            style={{ width: "100%", height: "calc(100% - 50px)" }}
-            // srcDoc={text}
-            title="W3Schools Free Online Web Tutorials"
-          ></iframe>
+            style={{ width: "100%", height: "calc(100% - 60px)" }}
+            className="card-div"
+          >
+            <iframe
+              ref={previewNode}
+              style={{ height: "100%", width: "100%", border: "none" }}
+              // srcDoc={text}
+              title="W3Schools Free Online Web Tutorials"
+            ></iframe>
+          </div>
         </Col>
       </Row>
     </Container>

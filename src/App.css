@@ -1,11 +1,8 @@
 .App {
   text-align: center;
   max-width: 100% !important;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+  min-height: 100vh;
+  padding: 10px 0;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -41,22 +38,31 @@
 #editor {
   position: relative;
   width: 100%;
-  height: calc(100% - 50px);
+  height: calc(100vh - 150px) !important;
+  margin: 4px 0px;
 }
 #preview-container {
-  height: 100vh;
+  height: calc(100vh -150px);
 }
 
 @media screen and (max-width: 767px) {
   #editor {
     position: relative;
-    height: 50vh;
+    height: 48vh !important;
   }
   #preview-container {
-    height: 50vh;
+    height: 48vh;
   }
 }
 
 .tooltip-container {
   height: 50px;
+}
+.card-div {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+}
+
+#preview {
+  margin: 4px 0;
 }
