@@ -6,9 +6,11 @@ import Container from "react-bootstrap/Container";
 
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-const ace = require("ace-builds");
-const twilightTheme = require("ace-builds/src-noconflict/theme-twilight");
-const mode = require("ace-builds/src-noconflict/mode-html").Mode;
+
+import ace from "ace-builds";
+import "ace-builds/webpack-resolver";
+import twilightTheme from "ace-builds/src-noconflict/theme-twilight";
+import {Mode} from "ace-builds/src-noconflict/mode-html";
 
 function App() {
   const code = "<!--write your code here-->";
@@ -27,7 +29,7 @@ function App() {
     if (node.current) {
       const editor = ace.edit(node.current);
       editor.setTheme(twilightTheme);
-      editor.session.setMode(new mode());
+      editor.session.setMode(new Mode());
       editor.setShowPrintMargin(false);
       editor.setOptions({ minLines: 200, fontSize: "16px" });
       editor.session.on("change", function (delta) {
@@ -43,7 +45,7 @@ function App() {
   }, []);
 
   return (
-    <Container className='App'>
+    <Container className="App">
       <h1>Welcome to my editor</h1>
       <Row>
         <Col sm={12} md={6}>
