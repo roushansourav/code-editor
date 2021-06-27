@@ -1,20 +1,11 @@
 import React from "react";
 import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
 
 import FileSaver from "file-saver";
 
-function Editor({
-  modeToggle,
-  setModeToggle,
-  setFileURL,
-  setText,
-  previewNode,
-  text,
-  fileURL,
-  editor,
-  editorNode,
-}) {
+import Tools from "./Tools";
+
+function Editor({ previewNode, editor, editorNode }) {
   const code = "<!--write your code here-->";
 
   const handleRun = (e) => {
@@ -32,15 +23,7 @@ function Editor({
 
   return (
     <Col id="editor-container" sm={12} md={6}>
-      <div className="tooltip-container">
-        <Button variant="success" className="btn" onClick={handleRun}>
-          Run
-        </Button>
-
-        <Button variant="success" className="btn" onClick={handleDownload}>
-          Download
-        </Button>
-      </div>
+      <Tools {...{ handleDownload, handleRun }} />
       <div id="editor" ref={editorNode} className="card-div">
         {code}
       </div>

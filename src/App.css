@@ -26,6 +26,7 @@
   width: 100%;
   height: calc(100% - 50px);
   margin: 4px 0px;
+  font-size: 14px;
 }
 #editor-container {
   height: calc(100vh - 125px);
@@ -37,7 +38,7 @@
 
 .tooltip-container {
   text-align: left;
-  height: 50px;
+  height: 32px;
 }
 
 .card-div {
@@ -57,19 +58,25 @@
   float: right;
 }
 
-.btn {
+.tools-icon {
   margin: 0 4px;
+  margin-top: 2px;
+  color: green;
 }
 
 @media screen and (max-width: 767px) {
   #editor-container {
-    height: calc(50vh - 20px);
+    height: calc(50vh - 34px);
     margin: 4px 0px;
   }
   #preview-container {
-    height: calc(50vh - 20px);
+    height: calc(50vh - 34px);
   }
   .tooltip-container-frame {
     height: 5px;
+  }
+  #preview {
+    height: calc(100% - 10px);
+    margin: 4px 0;
   }
 }

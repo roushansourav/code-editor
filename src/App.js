@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
 import Row from "react-bootstrap/Row";
-import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 
 import "./App.css";
@@ -8,14 +7,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import Editor from "./components/Editor";
 import Preview from "./components/Preview";
+import Switch from "./components/Switch";
 import aceEditor, { init } from "./lib/editor";
-
-// const initEditor = (editorRef, editorNodeRef) => {
-//   const editor = aceEditor.edit(editorNodeRef.current);
-//   editor.session.setMode(new aceEditor.mode());
-//   editor.setShowPrintMargin(false);
-//   editorRef.current = editor;
-// };
 
 function App() {
   const [text, setText] = useState("");
@@ -25,8 +18,7 @@ function App() {
   const editorNode = useRef(null);
   const editor = useRef(null);
 
-  const handleMode = (e) => {
-    e.preventDefault();
+  const handleMode = () => {
     setModeToggle(!modeToggle);
   };
 
@@ -49,9 +41,9 @@ function App() {
     >
       <div>
         <h4 className="inline-block">Welcome to my editor</h4>{" "}
-        <Button className="inline-block" onClick={handleMode}>
-          {modeToggle ? "Light" : "Dark"}
-        </Button>
+        <div style={{ float: "right" }} className="inline-block">
+          <Switch {...{ handleMode, modeToggle }} />
+        </div>
       </div>
 
       <Row style={{ height: "100%" }}>

@@ -2,7 +2,7 @@ import React from "react";
 import Col from "react-bootstrap/Col";
 import clsx from "clsx";
 
-function Preview({ previewNode, modeToggle, fileURL }) {
+function Preview({ previewNode, modeToggle }) {
   return (
     <Col id="preview-container" sm={12} md={6}>
       <div
