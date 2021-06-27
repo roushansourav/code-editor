@@ -8,14 +8,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import Editor from "./components/Editor";
 import Preview from "./components/Preview";
-import aceEditor from "./lib/editor";
+import aceEditor, { init } from "./lib/editor";
 
-const initEditor = (editorRef, editorNodeRef) => {
-  const editor = aceEditor.edit(editorNodeRef.current);
-  editor.session.setMode(new aceEditor.mode());
-  editor.setShowPrintMargin(false);
-  editorRef.current = editor;
-};
+// const initEditor = (editorRef, editorNodeRef) => {
+//   const editor = aceEditor.edit(editorNodeRef.current);
+//   editor.session.setMode(new aceEditor.mode());
+//   editor.setShowPrintMargin(false);
+//   editorRef.current = editor;
+// };
 
 function App() {
   const [text, setText] = useState("");
@@ -31,7 +31,7 @@ function App() {
   };
 
   useEffect(() => {
-    initEditor(editor, editorNode);
+    init(editor, editorNode);
   }, []);
 
   useEffect(() => {
