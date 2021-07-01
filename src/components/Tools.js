@@ -3,8 +3,11 @@ import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import GetAppIcon from "@material-ui/icons/GetApp";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import Form from "react-bootstrap/Form";
+import { darkThemes, lightThemes } from "../lib/editor";
 
-function Tools({ handleDownload, handleRun }) {
+function Tools({ handleDownload, handleRun, modeToggle, theme: t, setTheme }) {
+  const themeOptions = modeToggle ? darkThemes : lightThemes;
   return (
     <div className="tooltip-container">
       <OverlayTrigger
@@ -38,6 +41,29 @@ function Tools({ handleDownload, handleRun }) {
           style={{ fontSize: "2rem" }}
         />
       </OverlayTrigger>
+      <Form.Group
+        style={{
+          display: "inline-block",
+          float: "right",
+          margin: 0,
+        }}
+      >
+        <Form.Control
+          as="select"
+          size="sm"
+          style={{
+            color: modeToggle ? "white" : "#1b1b1b",
+            backgroundColor: modeToggle ? "#1b1b1b" : "white",
+          }}
+          onChange={(e) => setTheme(e.target.value)}
+        >
+          {themeOptions.map(({ caption, theme }, idx) => (
+            <option key={idx + theme} value={theme}>
+              {caption}
+            </option>
+          ))}
+        </Form.Control>
+      </Form.Group>
     </div>
   );
 }

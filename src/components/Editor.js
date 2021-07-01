@@ -5,7 +5,14 @@ import FileSaver from "file-saver";
 
 import Tools from "./Tools";
 
-function Editor({ previewNode, editor, editorNode }) {
+function Editor({
+  previewNode,
+  editor,
+  editorNode,
+  modeToggle,
+  theme,
+  setTheme,
+}) {
   const code = "<!--write your code here-->";
 
   const handleRun = (e) => {
@@ -23,7 +30,7 @@ function Editor({ previewNode, editor, editorNode }) {
 
   return (
     <Col id="editor-container" sm={12} md={6}>
-      <Tools {...{ handleDownload, handleRun }} />
+      <Tools {...{ handleDownload, handleRun, modeToggle, theme, setTheme }} />
       <div id="editor" ref={editorNode} className="card-div">
         {code}
       </div>

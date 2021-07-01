@@ -8,28 +8,33 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Editor from "./components/Editor";
 import Preview from "./components/Preview";
 import Switch from "./components/Switch";
-import aceEditor, { init } from "./lib/editor";
+import readFromLocalStorage from "./utils/readFromLS";
+import addToLocalStorage from "./utils/addToLS";
+import { init, lightThemes, darkThemes } from "./lib/editor";
 
 function App() {
   const [text, setText] = useState("");
   const [fileURL, setFileURL] = useState("");
-  const [modeToggle, setModeToggle] = useState(false);
+  const [modeToggle, setModeToggle] = useState(readFromLocalStorage("mode"));
+  const [theme, setTheme] = useState(
+    modeToggle ? darkThemes[0].theme : lightThemes[0].theme
+  );
   const previewNode = useRef(null);
   const editorNode = useRef(null);
   const editor = useRef(null);
 
   const handleMode = () => {
     setModeToggle(!modeToggle);
+    addToLocalStorage("mode", !modeToggle);
   };
 
   useEffect(() => {
-    init(editor, editorNode);
+    editor.current = init(editorNode);
   }, []);
 
   useEffect(() => {
-    if (modeToggle) editor.current.setTheme(aceEditor.twilight);
-    else editor.current.setTheme(aceEditor.solarized_light);
-  }, [modeToggle, editor]);
+    editor.current.setTheme(theme);
+  }, [modeToggle, editor, theme]);
 
   return (
     <Container
@@ -58,6 +63,8 @@ function App() {
             fileURL,
             editor,
             editorNode,
+            theme,
+            setTheme,
           }}
         />
         <Preview {...{ previewNode, modeToggle }} />

@@ -19,7 +19,7 @@ function Preview({ previewNode, modeToggle }) {
             borderRadius: "5px",
           }}
           // srcDoc={text}
-          title="W3Schools Free Online Web Tutorials"
+          title="preview"
         ></iframe>
       </div>
     </Col>
