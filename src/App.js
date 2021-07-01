@@ -33,8 +33,12 @@ function App() {
   }, []);
 
   useEffect(() => {
+    setTheme(modeToggle ? darkThemes[0].theme : lightThemes[0].theme);
+  }, [modeToggle]);
+
+  useEffect(() => {
     editor.current.setTheme(theme);
-  }, [modeToggle, editor, theme]);
+  }, [editor, theme]);
 
   return (
     <Container
